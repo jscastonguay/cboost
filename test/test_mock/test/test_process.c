@@ -14,6 +14,9 @@ ProcessCmd execute_initCmd_Cmd = {.cmd = "", .timeRef = 0, .option = 0};
 MOCK_CREATE_1(int, execute_initCmd, ProcessCmd *, 5, *p1 = execute_initCmd_Cmd);
 MOCK_CREATE_1(int, execute_setCmd, ProcessCmd *, 5,);
 
+/* Tests for return and parameters: */
+MOCK_CREATE_V0(fun_v0, 5, );
+
 int main(void) {
 
 	// process_init() -> When the Tx is NOT ready to send.
@@ -80,4 +83,9 @@ int main(void) {
 	TEST_STRING( P1(execute_setCmd, 1)->cmd, "start");
 	TEST_EXPECTED( P1(execute_setCmd, 1)->timeRef, 1000);
 	TEST_EXPECTED( P1(execute_setCmd, 1)->option, 0);
+
+	// process_task() -> Tests return and parameters...
+	MOCK_CLEAR(fun_v0);
+	process_task();
+	TEST_EXPECTED( MOCK_NB_CALLS(fun_v0), 1);
 }

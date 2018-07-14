@@ -1,6 +1,7 @@
 #include "process.h"
 #include "eusart1.h"
 #include "execute.h"
+#include "functions.h"
 #include <string.h>
 
 static State state = IDLE;
@@ -47,5 +48,5 @@ void process_init() {
 }
 
 void process_task() {
-    
+	fun_v0();
 }
